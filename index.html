@@ -28,10 +28,16 @@
                         <!-- Garis Pemisah -->
             <hr>
             <h5>Overtime</h5>
-            <!-- Jumlah Hari -->
+            
+            <!-- Jumlah Hari Overtime-->
             <div class="mb-3">
-                <label for="jumlahHari" class="form-label">Jumlah Hari</label>
-                <input type="number" class="form-control" id="jumlahHari" name="jumlahHari" placeholder="Masukkan jumlah hari" min="0">
+                <label for="jumlahHariOvertime" class="form-label">Jumlah Hari Overtime</label>
+                <input type="number" class="form-control" id="jumlahHariOvertime" name="jumlahHariOveryime" placeholder="Masukkan jumlah hari overtime" min="0">
+            </div>
+            <!-- Jumlah Hari Backup-->
+            <div class="mb-3">
+                <label for="jumlahHariBackup" class="form-label">Jumlah Hari Backup</label>
+                <input type="number" class="form-control" id="jumlahHariBackup" name="jumlahHariBackup" placeholder="Masukkan jumlah hari backup" min="0">
             </div>
             <!-- Jumlah Jam -->
             <div class="mb-3">
@@ -70,10 +76,12 @@
             const tambahanLeader = 200000; // Tambahan jika leader
             const bpjs = 208771;
             const bensin = 10000;
+            const overtime= 512873;
 
             // Ambil nilai input dari form
             const hariKerja = parseInt(document.getElementById('hariKerja').value) || 0;
-            const jumlahHari = parseInt(document.getElementById('jumlahHari').value) || 0;
+            const jumlahHariBackup = parseInt(document.getElementById('jumlahHariBackup').value) || 0;
+            const jumlahHariOvertime = parseInt(document.getElementById('jumlahHariOvertime').value) || 0;
             const jumlahJam = parseInt(document.getElementById('jumlahJam').value) || 0;
             const jumlahMenit = parseInt(document.getElementById('jumlahMenit').value) || 0;
             const jabatan = document.getElementById('jabatan').value;
@@ -86,13 +94,14 @@
 
             // Hitung gaji berdasarkan input
             const gajiHariKerja = hariKerja * gajiPerHariKerja;
-            const gajiOvertimeHari = jumlahHari * gajiPerHariKerja;
+            const gajiOvertimeHari = jumlahHariBackup * gajiPerHariKerja;
+            const gajiOvertimekerja = jumlahHariOvertime * overtime;
             const gajiOvertimeJam = jumlahJam * tarifPerJam;
             const gajiOvertimeMenit = jumlahMenit * tarifPerMenit;
-            const transport =(hariKerja + jumlahHari) * bensin
+            const transport =(hariKerja + jumlahHariBackup + jumlahHariOvertime) * bensin
  
             // Total gaji overtime
-            const totalOvertime = gajiOvertimeHari + gajiOvertimeJam + gajiOvertimeMenit;
+            const totalOvertime = gajiOvertimeHari + gajiOvertimeJam + gajiOvertimeMenit + gajiOvertimekerja;
 
             // Tambahan untuk leader
             const tambahanJabatan = jabatan === 'leader' ? tambahanLeader : 0;
